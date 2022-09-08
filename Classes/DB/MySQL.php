@@ -36,12 +36,12 @@ class MySQL
         }
     }
 
-    public function getOneByKey($codigo)
+    public function getOneByKey($id)
     {
         try {
             $consulta = 'SELECT * FROM ' . $this->table . ' WHERE id = :id';
             $stmt = $this->getDb()->prepare($consulta);
-            $stmt->bindParam(':id', $codigo);
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->fetch($this->getDb()::FETCH_ASSOC);
         } catch (Exception $exception) {

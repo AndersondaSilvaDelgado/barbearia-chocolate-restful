@@ -3,7 +3,7 @@
 namespace Service;
 
 use Util\ConstantesGenericasUtil;
-use Repository\UsuariosRepository;
+use Repository\UsuarioRepository;
 
 class UsuariosService
 {
@@ -14,34 +14,34 @@ class UsuariosService
 
     public function post($dados){
         $retorno = [];
-        $this->UsuariosRepository = new UsuariosRepository();
-        $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuariosRepository->insert($dados);
+        $this->UsuarioRepository = new UsuarioRepository();
+        $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuarioRepository->insert($dados);
         return $retorno;
     }
 
     public function put($dados, $codigo){
         $retorno = [];
-        $this->UsuariosRepository = new UsuariosRepository();
-        $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuariosRepository->update($dados, $codigo);
+        $this->UsuarioRepository = new UsuarioRepository();
+        $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuarioRepository->update($dados, $codigo);
         return $retorno;
     }
 
     public function login($dados){
         $retorno = [];
-        $this->UsuariosRepository = new UsuariosRepository();
-        $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuariosRepository->login($dados);
+        $this->UsuarioRepository = new UsuarioRepository();
+        $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuarioRepository->login($dados);
         return $retorno;
     }
 
     public function delete($codigo){
         $retorno = [];
-        $this->UsuariosRepository = new UsuariosRepository();
-        $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuariosRepository->delete($codigo);
+        $this->UsuarioRepository = new UsuarioRepository();
+        $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuarioRepository->delete($codigo);
         return $retorno;
     }
 
     private function getAll(){
-        $this->UsuariosRepository = new UsuariosRepository();
+        $this->UsuarioRepository = new UsuarioRepository();
         $page = null;
         $countpage = null;
         $order = null;
@@ -58,14 +58,14 @@ class UsuariosService
         if(isset($_GET['filter']) && !empty($_GET['filter'])){
             $filter = $_GET['filter'];
         }
-        $retorno[ConstantesGenericasUtil::DATA] = $this->UsuariosRepository->getFilter($page, $countpage, $order, $filter);
-        $retorno[ConstantesGenericasUtil::COUNT] = $this->UsuariosRepository->count()[0]['qtde'];
+        $retorno[ConstantesGenericasUtil::DATA] = $this->UsuarioRepository->getFilter($page, $countpage, $order, $filter);
+        $retorno[ConstantesGenericasUtil::COUNT] = $this->UsuarioRepository->count()[0]['qtde'];
         return $retorno;
     }
 
     private function getOneByKey($codigo){
-        $this->UsuariosRepository = new UsuariosRepository();
-        $retorno[ConstantesGenericasUtil::DATA] = $this->UsuariosRepository->getOneByKey($codigo);
+        $this->UsuarioRepository = new UsuarioRepository();
+        $retorno[ConstantesGenericasUtil::DATA] = $this->UsuarioRepository->getOneByKey($codigo);
         return $retorno;
     }
 

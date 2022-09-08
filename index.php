@@ -14,7 +14,6 @@ header('Access-Control-Allow-Methods: GET,POST,PUT,DELETE');
 http_response_code(200);
 
 try{
-
     $RequestValidator = new RequestValidator(RotasUtil::getRotas());
     $retorno = $RequestValidator->direcionarRequest();
     $retorno[ConstantesGenericasUtil::STATUS] = ConstantesGenericasUtil::TIPO_SUCESSO;
