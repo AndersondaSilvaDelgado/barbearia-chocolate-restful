@@ -6,9 +6,9 @@ use DB\MySQL;
 use Exception;
 use Util\ConstantesGenericasUtil;
 
-class UsuarioRepository extends MySQL
+class ServicosRepository extends MySQL
 {
-    public const TABELA = "usuarios";
+    public const TABELA = "servicos";
 
     public function __construct()
     {
@@ -18,7 +18,7 @@ class UsuarioRepository extends MySQL
     public function count()
     {
         try {
-            $consulta = "SELECT COUNT(codigo) as qtde FROM " . self::TABELA;
+            $consulta = "SELECT COUNT(id) as qtde FROM " . self::TABELA;
             $stmt = parent::getDb()->query($consulta);
             $registros = $stmt->fetchAll(parent::getDb()::FETCH_ASSOC);
             return $registros;
@@ -32,7 +32,7 @@ class UsuarioRepository extends MySQL
         try {
             $select = "SELECT * FROM " . self::TABELA;
             if(!empty($filter)){
-                $select = $select . " WHERE CONVERT(codigo, CHARACTER) LIKE '%" . $filter . "%'" . 
+                $select = $select . " WHERE CONVERT(id, CHARACTER) LIKE '%" . $filter . "%'" . 
                 " OR nome like  '%" . $filter . "%'"; 
             }
             if(!empty($order)){
@@ -48,25 +48,6 @@ class UsuarioRepository extends MySQL
             $stmt = parent::getDb()->query($select);
             $registros = $stmt->fetchAll(parent::getDb()::FETCH_ASSOC);
             return $registros;
-        } catch (Exception $exception) {
-            throw new Exception($exception->getMessage(), 404);
-        }
-    }
-
-    public function login($data)
-    {
-        try {
-            $consultaToken = 'SELECT codigo FROM ' .self::TABELA . ' WHERE nome = :nome AND senha = :senha';
-            $stmt = parent::getDb()->prepare($consultaToken);
-            foreach($data as $key => $value) {
-                $stmt->bindValue(':' . $key, $value);
-            }
-            $stmt->execute();
-            if($stmt->rowCount() === 1){
-                return ConstantesGenericasUtil::TIPO_SUCESSO;
-            } else {
-                throw new Exception(ConstantesGenericasUtil::TIPO_ERRO, 404);
-            }
         } catch (Exception $exception) {
             throw new Exception($exception->getMessage(), 404);
         }
