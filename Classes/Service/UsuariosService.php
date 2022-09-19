@@ -15,6 +15,7 @@ class UsuariosService
     public function post($dados){
         $retorno = [];
         $this->UsuariosRepository = new UsuariosRepository();
+        unset($dados['id']);
         $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuariosRepository->insert($dados);
         return $retorno;
     }
@@ -22,6 +23,7 @@ class UsuariosService
     public function put($dados, $codigo){
         $retorno = [];
         $this->UsuariosRepository = new UsuariosRepository();
+        unset($dados['id']);
         $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuariosRepository->update($dados, $codigo);
         return $retorno;
     }
@@ -29,6 +31,7 @@ class UsuariosService
     public function login($dados){
         $retorno = [];
         $this->UsuariosRepository = new UsuariosRepository();
+        unset($dados['id']);
         $retorno[ConstantesGenericasUtil::RESPONSE] = $this->UsuariosRepository->login($dados);
         return $retorno;
     }
